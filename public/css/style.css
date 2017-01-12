@@ -1,0 +1,33 @@
+
+body {
+    font-family: 'Lato';
+}
+
+.inf{
+    width: 100px;
+    height: 60px;
+    float: left;
+    margin-left: 30px;
+}
+#file{
+    width: 250px;
+}
+#bitedit{
+    margin-top: 24px;
+    margin-left: 20px;
+}
+#firsttab{
+    table-layout:fixed;
+}
+td{
+    word-wrap:break-word;
+}
+.editf{
+    width: 130px;
+}
+.inf2{
+    width: 130px;
+    height: 60px;
+    float: left;
+    margin-left: 30px;
+}
