@@ -34,11 +34,13 @@ class HomeController extends Controller
 
     public function find(Request $request)
     {
+
         $name=htmlspecialchars($request->name);
         $prod=htmlspecialchars($request->product);
         $category=htmlspecialchars($request->category);
+        $Type = Product_type::all();
+        $Category = Category::all();
 
-        $Product= new Product();
         if(!empty($name) && !empty($prod) && !empty($category)){
            $Product = Product::where('name','=',$name)->where('product_types_id','=',$prod)->where('categories_id','=',$category)->get();
         }
@@ -51,8 +53,18 @@ class HomeController extends Controller
         elseif(empty($name) && empty($prod) && !empty($category)){
             $Product = Product::where('categories_id','=',$category)->get();
         }
-        $Type = Product_type::all();
-        $Category = Category::all();
+        elseif(!empty($name) && !empty($prod) && empty($category)){
+            $Product = Product::where('name','=',$name)->where('product_types_id','=',$prod)->get();
+        }
+        elseif(!empty($name) && empty($prod) && !empty($category)){
+            $Product = Product::where('name','=',$name)->where('categories_id','=',$category)->get();
+        }
+        elseif(empty($name) && !empty($prod) && !empty($category)){
+            $Product = Product::where('categories_id','=',$category)->where('product_types_id','=',$prod)->get();
+        }
+        elseif(empty($name) && empty($prod) && empty($category)){
+            $Product = Product::all();
+        }
 
         foreach($Product as $item){
             foreach($Category as $item2){
@@ -68,6 +80,8 @@ class HomeController extends Controller
             }
         }
         return view('home',['Product' => $Product, 'Type'=>$Type, 'Category'=>$Category]);
+
+
     }
 
 
