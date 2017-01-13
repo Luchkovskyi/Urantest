@@ -26,7 +26,7 @@
                                 <label for="file"  class="edit" >image</label>
                                 <input type="file" id="file" name="file"  class="form-control edit" /><br/>
 
-                            <button type="submit" id="bitedit" class="btn btn-primary">
+                            <button type="button" id="bitedit" class="btn btn-primary">
                                 <i class="fa fa-btn fa-user"></i> Add new
                             </button><br/>
 
@@ -38,6 +38,29 @@
             </div>
         </div>
     </div>
-    </div>
-
+    <script>
+        $(document).ready(function() {
+            var name=$('#name');  var desc=$('#desc'); var category=$('#category'); var product =$('#product');
+            $('#bitedit').click(function(){
+                    if(name.val()=="" ||  desc.val()=="" || category.val()=="" || product.val()==""){
+                        if(name.val()==""){
+                            name.css('border', 'red 1px solid');
+                        }
+                        if(desc.val()==""){
+                            desc.css('border', 'red 1px solid');
+                        }
+                        if(category.val()==""){
+                            category.css('border', 'red 1px solid');
+                        }
+                        if(product.val()==""){
+                            product.css('border', 'red 1px solid');
+                        }
+                        event.stopPropagation();
+                    }
+                   if(name.val()!="" &&  desc.val()!="" && category.val()!="" && product.val()!=""){
+                     $('#bitedit').attr('type', 'submit');
+                   }
+            });
+        });
+    </script>
 @endsection
